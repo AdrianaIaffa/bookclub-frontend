@@ -1,0 +1,13 @@
+.navbar .navbar-brand {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.5rem;
+    text-shadow: -1px -1px 1px red, 1px -1px 1px orange, -1px 1px 1px yellow, 1px 1px 1px green, -2px 2px 2px blue, 2px 2px 2px indigo, -2px 3px 2px violet;    color: white;
+}
+
+body .bg-body-tertiary {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 2em !important;
+    border-bottom: 3px solid black;
+    background-color: white !important;
+}
