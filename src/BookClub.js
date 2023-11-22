@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./BookClub.css";
 
 export default function BookClub() {
@@ -45,9 +46,10 @@ export default function BookClub() {
             </div>
             <div className="info-container">
               <h3 className="bookclub-title">Bookclub</h3>
-              <h3>{bookclub.name}</h3>
+              <Link to={`/bookclubs/${bookclub.url.split("/").reverse()[1]}`}>{bookclub.name}</Link>
+              {/* <h3>{bookclub.name}</h3> */}
               <p>{bookclub.description}</p>
-              <p>{bookclub.memebers}</p>
+              <p>members:{bookclub.members.length}</p>
             </div>
           </div>
         ))}

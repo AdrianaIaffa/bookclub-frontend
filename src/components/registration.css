@@ -1,7 +1,48 @@
-.body-signup {
-    margin: 1em 10em;
+.body-signup,
+.body-login {
+    margin: 5em 10em;
   }
 
-.body-signup h1 {
+.body-signup h1,
+.Auth-form-title {
     color: #FF7733;
+    font-weight: bolder;
+    font-size: 3em;
+    font-family: 'Permanent Marker', cursive;
   }
+
+ .Auth-form-form,
+ .form-container {
+    DISPLAY: FLEX;
+    FLEX-DIRECTION: column;
+}
+
+.form-container form {
+    width: 100%;
+    max-width: 400px; 
+}
+
+.form-container button,
+ button.btn.btn-primary {
+    width: 100%; 
+    background-color: #FF7733 !important ;
+    font-weight: bolder;
+    color: #5F2692;
+    border-color: #FF7733;
+}
+.form-container button:hover,
+button.btn.btn-primary:hover {
+    background-color: #FF8D5C !important; /* Lighter color on hover */
+    border-color: #FF8D5C;
+}
+
+button.btn.btn-primary.redirect {   
+    background-color: #5F2692 !important;
+    color: #FF8D5C;
+    border-color: #5F2692;
+}
+
+button.btn.btn-primary.redirect:hover {   
+    background-color: #752EB2 !important;
+    border-color: #752EB2;
+}

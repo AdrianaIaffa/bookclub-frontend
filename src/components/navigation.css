@@ -11,3 +11,7 @@ body .bg-body-tertiary {
     border-bottom: 3px solid black;
     background-color: white !important;
 }
+
+a.nav-link {
+    font-weight: bolder;
+}

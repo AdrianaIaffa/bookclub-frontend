@@ -8,6 +8,9 @@ import  {Navigation}  from './components/navigation';
 import { Logout } from "./components/logout";
 import BookClub from './BookClub';
 import  Registration  from './components/registration';
+import BookClubDetail from "./BookClubDetail";
+import Addbookclub from './components/addbookclub';
+
 // import NavBar from './NavBar/NavBar';
 
 // function App() {
@@ -30,7 +33,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/create_bookclub" element={<Addbookclub />} />
         <Route path="/bookclubs" element={<BookClub />} />
+        <Route path="/bookclubs/:id" element={<BookClubDetail />} />
         <Route path="/registration" element ={<Registration />} />
       </Routes>
     </BrowserRouter>

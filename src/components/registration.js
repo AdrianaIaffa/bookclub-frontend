@@ -41,28 +41,43 @@ export default function Registration() {
     <>
       <div className="body-signup">
 
-        <h1>Sign Up!</h1>
+        <h1>SIGN UP</h1>
 
         <div className="form-container">
 
-          <Form>
+          <Form onSubmit={handleSubmit}>
 
             <Form.Group className="mb-3" controlId="formBasicUsername">
                <Form.Label>Username</Form.Label>
-               <Form.Control type="text" placeholder="Enter username" />
+               <Form.Control 
+               type="text" 
+               placeholder="Enter username"
+               name="username"
+               value={formData.username}
+               onChange={handleChange} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
+              <Form.Control 
+              type="email" 
+              placeholder="Enter email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange} />
+              {/* <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
-              </Form.Text>
+              </Form.Text> */}
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control 
+              type="password" 
+              placeholder="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange} />
             </Form.Group>
 
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -70,7 +85,7 @@ export default function Registration() {
             </Form.Group> */}
 
             <Button variant="primary" type="submit">
-              Submit
+              JOIN US
             </Button>
           </Form>
         </div>

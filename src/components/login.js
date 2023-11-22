@@ -1,6 +1,7 @@
 // Import the react JS packages
 import axios from "axios";
 import { useState } from "react";
+import './registration.css'
 // Define the Login function.
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -30,10 +31,11 @@ export const Login = () => {
     window.location.href = "/";
   };
   return (
+    <div className="body-login">
     <div className="Auth-form-container">
       <form className="Auth-form" onSubmit={submit}>
         <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
+          <h3 className="Auth-form-title">LOGIN</h3>
           <div className="form-group mt-3">
             <label>Username</label>
             <input
@@ -60,11 +62,26 @@ export const Login = () => {
           </div>
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-primary">
-              Submit
+              LOGIN
             </button>
           </div>
+
+          <div className="text-center mt-3">
+              {/* <p className="mb-0">Not a member? Join us</p> */}
+              <button
+                type="button"
+                className="btn btn-primary redirect"
+                onClick={() => {
+                  // Redirect to the registration page
+                  window.location.href = "/registration";
+                }}
+              >
+                NOT A MEMBER? JOIN US
+              </button>
+            </div>
         </div>
       </form>
+    </div>
     </div>
   );
 };

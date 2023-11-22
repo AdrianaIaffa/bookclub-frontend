@@ -12,6 +12,7 @@ export function Navigation() {
     }
   }, [isAuth]);
   return (
+    <>
     <Navbar className="bg-body-tertiary">
     <div>
       <Navbar.Brand className="navbar-brand" href="#home">The Book Club</Navbar.Brand>
@@ -19,7 +20,7 @@ export function Navigation() {
     <Nav className="justify-content-center" activeKey="/home">
 
         <Nav.Item>
-          {isAuth ? <Nav.Link href="/">Home</Nav.Link> : null}
+          {isAuth ? <Nav.Link href="/">HOME</Nav.Link> : null}
         </Nav.Item>
 
         {/* <Nav.Item>
@@ -32,21 +33,33 @@ export function Navigation() {
 
         {isAuth ? (
           <>
+           <Nav.Item>
+                <Nav.Link href="/create_bookclub">ADD BOOK CLUB</Nav.Link>
+              </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/bookclubs">Bookclubs</Nav.Link>
+            
+            <Nav.Link href="/bookclubs">ALL BOOKCLUBS</Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link href="/logout">Logout</Nav.Link>
+            <Nav.Link href="/logout">LOGOUT</Nav.Link>
           </Nav.Item> 
 
         </>
           ) : (
+            
+          <>
+          <Nav.Item>
+                <Nav.Link href="/registration">SIGN UP</Nav.Link>
+              </Nav.Item>
+
           <Nav.Item> 
-            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/login">LOGIN</Nav.Link>
           </Nav.Item>
+          </>
           )}
       </Nav>
   </Navbar>
+  </>
   );
 }
