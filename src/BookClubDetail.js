@@ -29,18 +29,6 @@ export default function BookClubDetail() {
     });
     const data = await response.json();
 
-    const membersData = await Promise.all(
-      (data.members || []).map(async (memberUrl) => {
-        const memberResponse = await fetch(memberUrl, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            "Content-Type": "application/json",
-          },
-        });
-        return memberResponse.json();
-      })
-    );
 
     console.log(`${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/comments/`);
 
@@ -58,7 +46,7 @@ export default function BookClubDetail() {
     setComments(commentsData);
     setBookClub({
       ...data,
-      members: membersData,
+      members: data.members,
     });
 
     const userId = decodedtoken.user_id;
