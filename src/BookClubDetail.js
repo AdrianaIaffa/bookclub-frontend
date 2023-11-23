@@ -80,7 +80,8 @@ export default function BookClubDetail() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           "Content-Type": "application/json",
-        },
+          
+        }, body: JSON.stringify(userId)
       }
     );
 
