@@ -160,7 +160,7 @@ export default function BookClubDetail() {
               ) : (
                 <Button onClick={joinBookClub}>Join</Button>
               )} 
-            
+            {/* eslint-disable-next-line */}
               {bookclub.created_by == userId && (
                 <>
                   <Button onClick={editBookClub}>Edit</Button>
