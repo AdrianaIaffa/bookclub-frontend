@@ -31,7 +31,7 @@ export default function BookClubDetail() {
 
     const membersData = await Promise.all(
       (data.members || []).map(async (memberUrl) => {
-        const memberResponse = await fetch(memberUrl.replace(/^http:/, 'https:'), {
+        const memberResponse = await fetch(memberUrl, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
