@@ -12,7 +12,7 @@ export default function BookClubDetail() {
   const [bookclub, setBookClub] = useState({});
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
-  const [isMember, setIsMember] = useState(false);
+  // const [isMember, setIsMember] = useState(false);
   const token = localStorage.getItem("access_token");
   const decodedtoken = jwtDecode(token);
   const userId = decodedtoken.user_id;
@@ -47,8 +47,10 @@ export default function BookClubDetail() {
       const memberId = memberUrl.split('/registration/')[1].replace('/', '');
       return parseInt(memberId);
     });
-    const currentUserIsMember = memberNumbers.includes(userId);
-    setIsMember(currentUserIsMember);
+
+    // const currentUserIsMember = memberNumbers.includes(userId);
+    // setIsMember(currentUserIsMember);
+
     console.log(memberNumbers);
     setComments(commentsData);
     setBookClub({
@@ -74,7 +76,7 @@ export default function BookClubDetail() {
       if (response.ok) {
         const data = await response.json();
         console.log("Joined book club successfully:", data);
-        setIsMember(true);
+        // setIsMember(true);
         getBookClubDetails();
       } else {
         const errorData = await response.json();
@@ -167,7 +169,7 @@ export default function BookClubDetail() {
               ) : (
                 <Button onClick={joinBookClub}>Join</Button>
               )}
-              {bookclub.created_by == userId && (
+              {bookclub.created_by === userId && (
                 <>
                   <Button onClick={editBookClub}>Edit</Button>
                   <Button onClick={deleteBookClub}>Delete</Button>
