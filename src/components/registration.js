@@ -32,6 +32,7 @@ export default function Registration() {
 
       const data = await response.json();
       console.log("User registered:", data);
+      window.location.href = "/";
     } catch (error) {
       console.error("Error registering user:", error);
     }

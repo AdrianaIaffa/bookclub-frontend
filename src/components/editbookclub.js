@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-
-export default function Addbookclub() {
+export default function EditBookClub() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const token = localStorage.getItem("access_token");
   console.log("Token:", token);
   const [clubData, setClubData] = useState({
@@ -15,8 +15,38 @@ export default function Addbookclub() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  useEffect(() => {
+    // Fetch book club details and set them in the state for editing
+    const fetchBookClubDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/bookclubs/${id}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-  
+        if (response.ok) {
+          const data = await response.json();
+          // Set the retrieved data in the state for editing
+          setClubData({
+            name: data.name,
+            description: data.description,
+            discussion: data.discussion,
+          });
+        } else {
+          // Handle errors
+          console.error("Error fetching book club details");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchBookClubDetails();
+  }, [id]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setClubData((prevData) => ({
@@ -27,10 +57,10 @@ export default function Addbookclub() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  const formattedDiscussion = clubData.discussion.replace(/\n/g, '<br>');
+    const formattedDiscussion = clubData.discussion.replace(/\n/g, '<br>');
     try {
-      const response = await fetch("http://localhost:8000/create_bookclub/", {
-        method: "POST",
+      const response = await fetch(`http://localhost:8000/bookclubs/${id}/update_bookclub/`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -38,30 +68,27 @@ export default function Addbookclub() {
         body: JSON.stringify({
           ...clubData,
           discussion: formattedDiscussion,
-  
         }),
       });
 
       if (response.ok) {
         // Handle success, e.g., redirect to a success page
-        console.log("Book club created successfully");
-        navigate("/bookclubs");
+        console.log("Book club updated successfully");
+        navigate(`/bookclubs/${id}`);
       } else {
         // Handle errors
-        console.error("Error creating book club");
+        console.error("Error updating book club");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-
-  
   };
 
   return (
     <>
-      <div className="body-addbookclub">
-        <h1>ADD BOOK CLUB</h1>
-        <div >
+      <div className="body-editbookclub">
+        <h1>EDIT BOOK CLUB</h1>
+        <div>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Club Name</Form.Label>
@@ -99,7 +126,7 @@ export default function Addbookclub() {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              CREATE CLUB
+              UPDATE CLUB
             </Button>
           </Form>
         </div>

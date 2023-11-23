@@ -1,17 +1,22 @@
+.body-login,
 .body-signup,
-.body-login {
+.body-addbookclub,
+.body-editbookclub {
     margin: 5em 10em;
-  }
+    /* background-image: url('../../public/images/Cool Kids - Staying Home.png'); 
+    background-size: cover;
+    background-repeat: no-repeat; */
+}
+  
 
 .body-signup h1,
-.Auth-form-title {
+.body-login h1 {
     color: #FF7733;
     font-weight: bolder;
     font-size: 3em;
     font-family: 'Permanent Marker', cursive;
   }
 
- .Auth-form-form,
  .form-container {
     DISPLAY: FLEX;
     FLEX-DIRECTION: column;

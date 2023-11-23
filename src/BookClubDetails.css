@@ -1,0 +1,54 @@
+.top-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-comment-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.speech-bubbles-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.speech-bubble {
+  background-color: #f5effb;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.speech-bubble p{
+  padding: 1em;
+}
+
+.add-comment-container {
+  margin-top: 20px;
+}
+
+.discussion-questions {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5em;
+  background: #fff1eb;
+  margin: 3em 0em;
+}
+.bookclub-body .form-container button,
+.bookclub-body button.btn.btn-primary {
+    /* width: 35%; */
+    margin: 5px;
+}
+
+.book-title h1 {
+  font-size: 5em;
+}
+
+.comments-section h5 {
+  margin: 1em 0;
+  font-size: 2em;
+  font-style: italic;
+}

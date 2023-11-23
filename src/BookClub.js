@@ -3,10 +3,21 @@ import { Link } from "react-router-dom";
 import "./BookClub.css";
 
 export default function BookClub() {
-  const [bookclubs, setBookClubs] = useState([]);
-  const token = localStorage.getItem("access_token");
-  console.log("Token:", token);
 
+  const getRandomImage = () => {
+    const images = [
+      "/images/Big Shoes - Torso (1).png",
+      "/images/Big Shoes - Torso (2).png",
+      "/images/Big Shoes - Torso (3).png",
+      "/images/Big Shoes - Torso (4).png",
+    ];
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
+  const [bookclubs, setBookClubs] = useState([]);
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
+
+  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
     const getBookClub = async () => {
@@ -18,10 +29,26 @@ export default function BookClub() {
         },
       });
       const data = await response.json();
-      setBookClubs(data);
+      const bookclubsWithImages = data.map((bookclub) => ({
+        ...bookclub,
+        image: getRandomImage(),
+      }));
+
+      setBookClubs(bookclubsWithImages);
+      // setBookClubs(data);
     };
     getBookClub();
   }, []);
+
+  const toggleDescription = (bookclubId) => {
+    console.log("Clicked book club id:", bookclubId);
+
+    setExpandedDescriptions((prevDescriptions) => ({
+      ...prevDescriptions,
+      [bookclubId]: !prevDescriptions[bookclubId],
+    }));
+  };
+
   return (
     <div>
       <div className="join-banner">
@@ -39,18 +66,30 @@ export default function BookClub() {
       </div>
 
       <div className="bookclub-body">
-        {bookclubs.map((bookclub) => (
-          <div key={bookclub.id} className="bookclub-item">
+  
+        {bookclubs.map((bookclub, index) => (
+          <div key={index} className="bookclub-item">
+
             <div className="image-container">
-              <img src={bookclub.imageSrc} alt={`Image for ${bookclub.name}`} />
+            <img src={bookclub.image} alt={`Image for ${bookclub.name}`} />
             </div>
+
             <div className="info-container">
-              <h3 className="bookclub-title">Bookclub</h3>
-              <Link to={`/bookclubs/${bookclub.url.split("/").reverse()[1]}`}>{bookclub.name}</Link>
-              {/* <h3>{bookclub.name}</h3> */}
-              <p>{bookclub.description}</p>
-              <p>members:{bookclub.members.length}</p>
+              <h3><Link to={`/bookclubs/${bookclub.url.split("/").reverse()[1]}`}className="link-no-style">{bookclub.name}</Link></h3>
+              <p className="description">
+
+              {expandedDescriptions[bookclub.url.split("/").slice(-2, -1)[0]]
+                  ? bookclub.description
+                  : `${bookclub.description.slice(0, 100)}...`}
+                <span
+                  className="read-more"
+                  onClick={() => toggleDescription(bookclub.url.split("/").slice(-2, -1)[0])}
+                >
+                  {expandedDescriptions[bookclub.url.split("/").slice(-2, -1)[0]] ? 'See less' : 'Read more'}
+                </span>
+              </p>
             </div>
+
           </div>
         ))}
       </div>

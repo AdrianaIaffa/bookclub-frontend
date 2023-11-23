@@ -10,6 +10,8 @@ import BookClub from './BookClub';
 import  Registration  from './components/registration';
 import BookClubDetail from "./BookClubDetail";
 import Addbookclub from './components/addbookclub';
+import EditBookClub from './components/editbookclub';
+import LandingPage from './LandingPage';
 
 // import NavBar from './NavBar/NavBar';
 
@@ -31,9 +33,11 @@ function App() {
       <Routes>
        
         <Route path="/" element={<Home />} />
+        <Route path="/landingpage" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/create_bookclub" element={<Addbookclub />} />
+        <Route path="/bookclubs/:id/update_bookclub" element={<EditBookClub />} />
         <Route path="/bookclubs" element={<BookClub />} />
         <Route path="/bookclubs/:id" element={<BookClubDetail />} />
         <Route path="/registration" element ={<Registration />} />
