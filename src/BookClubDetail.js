@@ -41,6 +41,8 @@ export default function BookClubDetail() {
         return memberResponse.json();
       })
     );
+    
+    console.log(`${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/comments/`);
 
     const commentsResponse = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/${id}/comments/`,
