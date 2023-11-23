@@ -13,10 +13,10 @@ export default function BookClubDetail() {
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [isMember, setIsMember] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
   const token = localStorage.getItem("access_token");
   const decodedtoken = jwtDecode(token);
-  console.log(decodedtoken);
+  const userId = decodedtoken.user_id;
+  console.log(decodedtoken.user_id);
 
   // eslint-disable-next-line
   const getBookClubDetails = async () => {
@@ -30,9 +30,6 @@ export default function BookClubDetail() {
     const data = await response.json();
     console.log(data)
 
-
-    console.log(`${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/comments/`);
-
     const commentsResponse = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/comments/`,
       {
@@ -43,42 +40,48 @@ export default function BookClubDetail() {
         },
       }
     );
+  
     const commentsData = await commentsResponse.json();
+    const created_by = data.created_by.split('/registration/')[1].replace('/','');
+    const memberNumbers = data.members.map(memberUrl => {
+      const memberId = memberUrl.split('/registration/')[1].replace('/', '');
+      return parseInt(memberId);
+    });
+    const currentUserIsMember = memberNumbers.includes(userId);
+    setIsMember(currentUserIsMember);
+    console.log(memberNumbers);
     setComments(commentsData);
     setBookClub({
       ...data,
       members: data.members,
+      created_by: created_by,
+      member_id: memberNumbers
+    
     });
-    console.log(data.members)
-    const userId = decodedtoken.user_id;
-    const calculatedIsMember = data.members?.some((memberUrl) => {
-      return memberUrl === `http://localhost:8000/registration/${userId}/`;
-    });
-    setIsMember(calculatedIsMember);
-
-    const calculatedIsOwner =
-      data.created_by === `http://localhost:8000/registration/${userId}/`;
-    setIsOwner(calculatedIsOwner);
-  };
-
+  }
   const joinBookClub = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/join/`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          "Content-Type": "application/json",
-          
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/join/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            "Content-Type": "application/json",
+          }
         }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Joined book club successfully:", data);
+        setIsMember(true);
+        getBookClubDetails();
+      } else {
+        const errorData = await response.json();
+        console.error("Error joining book club:", errorData);
       }
-    );
-
-    if (response.status === 200) {
-      getBookClubDetails();
-    } else if (response.status === 400) {
-    } else {
-      console.error("Failed to join the book club");
+    } catch (error) {
+      console.error("Error joining book club:", error.message);
     }
   };
 
@@ -149,10 +152,6 @@ export default function BookClubDetail() {
     // eslint-disable-next-line
   }, [id]);
 
-  // useEffect(() => {
-  //   console.log("Comments:", comments);
-  // }, [comments]);
-
   return (
     <>
       <div className="bookclub-body">
@@ -163,12 +162,12 @@ export default function BookClubDetail() {
             </div>
 
             <div className="buttons-container">
-              {isMember ? (
+              {bookclub.member_id?.includes(userId)? (
                 <Button onClick={leaveBookClub}>Leave</Button>
               ) : (
                 <Button onClick={joinBookClub}>Join</Button>
               )}
-              {isOwner && (
+              {bookclub.created_by == userId && (
                 <>
                   <Button onClick={editBookClub}>Edit</Button>
                   <Button onClick={deleteBookClub}>Delete</Button>
@@ -206,7 +205,7 @@ export default function BookClubDetail() {
               <p>No comments available.</p>
             )}
 
-            {isMember && (
+            { bookclub.member_id?.includes(userId) && (
               <div className="add-comment-container">
                 <Form.Group controlId="formBasicComment">
                   <Form.Control
