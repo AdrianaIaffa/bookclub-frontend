@@ -157,11 +157,12 @@ export default function BookClubDetail() {
   };
   useEffect(() => {
     getBookClubDetails();
-  }, [id, getBookClubDetails]);
+    // eslint-disable-next-line
+  }, [id]);
 
-  useEffect(() => {
-    console.log("Comments:", comments);
-  }, [comments]);
+  // useEffect(() => {
+  //   console.log("Comments:", comments);
+  // }, [comments]);
 
   return (
     <>
