@@ -12,11 +12,9 @@ export default function BookClubDetail() {
   const [bookclub, setBookClub] = useState({});
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
-  // const [isMember, setIsMember] = useState(false);
   const token = localStorage.getItem("access_token");
   const decodedtoken = jwtDecode(token);
   const userId = decodedtoken.user_id;
-  console.log(decodedtoken.user_id);
 
   // eslint-disable-next-line
   const getBookClubDetails = async () => {
@@ -28,7 +26,6 @@ export default function BookClubDetail() {
       },
     });
     const data = await response.json();
-    console.log(data)
 
     const commentsResponse = await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/comments/`,
@@ -47,11 +44,6 @@ export default function BookClubDetail() {
       const memberId = memberUrl.split('/registration/')[1].replace('/', '');
       return parseInt(memberId);
     });
-
-    // const currentUserIsMember = memberNumbers.includes(userId);
-    // setIsMember(currentUserIsMember);
-
-    console.log(memberNumbers);
     setComments(commentsData);
     setBookClub({
       ...data,
@@ -76,7 +68,6 @@ export default function BookClubDetail() {
       if (response.ok) {
         const data = await response.json();
         console.log("Joined book club successfully:", data);
-        // setIsMember(true);
         getBookClubDetails();
       } else {
         const errorData = await response.json();
@@ -168,8 +159,9 @@ export default function BookClubDetail() {
                 <Button onClick={leaveBookClub}>Leave</Button>
               ) : (
                 <Button onClick={joinBookClub}>Join</Button>
-              )}
-              {bookclub.created_by === userId && (
+              )} 
+              {/* eslint-disable-next-line */}
+              {bookclub.created_by == userId && (
                 <>
                   <Button onClick={editBookClub}>Edit</Button>
                   <Button onClick={deleteBookClub}>Delete</Button>
