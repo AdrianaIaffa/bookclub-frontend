@@ -13,19 +13,6 @@ import Addbookclub from './components/addbookclub';
 import EditBookClub from './components/editbookclub';
 import LandingPage from './LandingPage';
 
-// import NavBar from './NavBar/NavBar';
-
-// function App() {
-//   return (
-//     <div className="App">
-//      <NavBar>
-//      </NavBar>
-//       <BookClub />
-//     </div>
-//   );
-// }
-
-// export default App;
 function App() {
   return (
     <BrowserRouter>

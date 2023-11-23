@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-
 
 export default function Addbookclub() {
   const navigate = useNavigate();
@@ -13,10 +12,7 @@ export default function Addbookclub() {
     description: "",
     discussion: "",
   });
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
-
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setClubData((prevData) => ({
@@ -27,9 +23,9 @@ export default function Addbookclub() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  const formattedDiscussion = clubData.discussion.replace(/\n/g, '<br>');
+    const formattedDiscussion = clubData.discussion.replace(/\n/g, "<br>");
     try {
-      const response = await fetch("http://localhost:8000/create_bookclub/", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/create_bookclub/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,30 +34,25 @@ export default function Addbookclub() {
         body: JSON.stringify({
           ...clubData,
           discussion: formattedDiscussion,
-  
         }),
       });
 
       if (response.ok) {
-        // Handle success, e.g., redirect to a success page
         console.log("Book club created successfully");
         navigate("/bookclubs");
       } else {
-        // Handle errors
         console.error("Error creating book club");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-
-  
   };
 
   return (
     <>
       <div className="body-addbookclub">
         <h1>ADD BOOK CLUB</h1>
-        <div >
+        <div>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Club Name</Form.Label>

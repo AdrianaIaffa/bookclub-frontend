@@ -13,13 +13,11 @@ export default function EditBookClub() {
     description: "",
     discussion: "",
   });
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
-    // Fetch book club details and set them in the state for editing
     const fetchBookClubDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/bookclubs/${id}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -29,21 +27,18 @@ export default function EditBookClub() {
 
         if (response.ok) {
           const data = await response.json();
-          // Set the retrieved data in the state for editing
           setClubData({
             name: data.name,
             description: data.description,
             discussion: data.discussion,
           });
         } else {
-          // Handle errors
           console.error("Error fetching book club details");
         }
       } catch (error) {
         console.error("Error:", error);
       }
     };
-
     fetchBookClubDetails();
   }, [id]);
 
@@ -57,26 +52,27 @@ export default function EditBookClub() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formattedDiscussion = clubData.discussion.replace(/\n/g, '<br>');
+    const formattedDiscussion = clubData.discussion.replace(/\n/g, "<br>");
     try {
-      const response = await fetch(`http://localhost:8000/bookclubs/${id}/update_bookclub/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-        body: JSON.stringify({
-          ...clubData,
-          discussion: formattedDiscussion,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/update_bookclub/`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+          body: JSON.stringify({
+            ...clubData,
+            discussion: formattedDiscussion,
+          }),
+        }
+      );
 
       if (response.ok) {
-        // Handle success, e.g., redirect to a success page
         console.log("Book club updated successfully");
         navigate(`/bookclubs/${id}`);
       } else {
-        // Handle errors
         console.error("Error updating book club");
       }
     } catch (error) {

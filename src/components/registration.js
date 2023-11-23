@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import './registration.css'
+import "./registration.css";
 
 export default function Registration() {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ export default function Registration() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/registration/", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/registration/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,49 +41,42 @@ export default function Registration() {
   return (
     <>
       <div className="body-signup">
-
         <h1>SIGN UP</h1>
 
         <div className="form-container">
-
           <Form onSubmit={handleSubmit}>
-
             <Form.Group className="mb-3" controlId="formBasicUsername">
-               <Form.Label>Username</Form.Label>
-               <Form.Control 
-               type="text" 
-               placeholder="Enter username"
-               name="username"
-               value={formData.username}
-               onChange={handleChange} />
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control 
-              type="email" 
-              placeholder="Enter email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange} />
-              {/* <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text> */}
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control 
-              type="password" 
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange} />
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
             </Form.Group>
-
-            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group> */}
 
             <Button variant="primary" type="submit">
               JOIN US

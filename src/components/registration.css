@@ -3,12 +3,8 @@
 .body-addbookclub,
 .body-editbookclub {
     margin: 5em 10em;
-    /* background-image: url('../../public/images/Cool Kids - Staying Home.png'); 
-    background-size: cover;
-    background-repeat: no-repeat; */
 }
   
-
 .body-signup h1,
 .body-login h1 {
     color: #FF7733;
@@ -37,7 +33,7 @@
 }
 .form-container button:hover,
 button.btn.btn-primary:hover {
-    background-color: #FF8D5C !important; /* Lighter color on hover */
+    background-color: #FF8D5C !important; 
     border-color: #FF8D5C;
 }
 

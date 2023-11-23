@@ -15,11 +15,9 @@ export function Navigation() {
   }, [isAuth]);
 
   const handleHomeClick = () => {
-    // If the user is logged in, redirect to the bookclubs page
     if (isAuth) {
       navigate("/bookclubs");
     }
-    // Otherwise, do nothing (let the link work as usual for logged-out users)
   };
 
   return (
@@ -32,7 +30,6 @@ export function Navigation() {
         </div>
         <Nav className="justify-content-center" activeKey="/home">
           <Nav.Item>
-            {/* Conditionally render the HOME link based on authentication status */}
             {!isAuth && <Nav.Link onClick={handleHomeClick}></Nav.Link>}
           </Nav.Item>
           {isAuth ? (
