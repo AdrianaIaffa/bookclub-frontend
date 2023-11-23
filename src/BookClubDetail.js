@@ -28,6 +28,7 @@ export default function BookClubDetail() {
       },
     });
     const data = await response.json();
+    console.log(data)
 
 
     console.log(`${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/comments/`);
@@ -48,15 +49,15 @@ export default function BookClubDetail() {
       ...data,
       members: data.members,
     });
-
+    console.log(data.members)
     const userId = decodedtoken.user_id;
     const calculatedIsMember = data.members?.some((memberUrl) => {
-      return memberUrl === `${process.env.REACT_APP_BACKEND_URL}/registration/${userId}/`;
+      return memberUrl === `http://localhost:8000/registration/${userId}/`;
     });
     setIsMember(calculatedIsMember);
 
     const calculatedIsOwner =
-      data.created_by === `${process.env.REACT_APP_BACKEND_URL}/registration/${userId}/`;
+      data.created_by === `http://localhost:8000/registration/${userId}/`;
     setIsOwner(calculatedIsOwner);
   };
 
