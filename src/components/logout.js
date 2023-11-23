@@ -8,13 +8,17 @@ export const Logout = () => {
     (async () => {
       try {
         // eslint-disable-next-line no-unused-vars
-        const { data } =  await axios.post(
+        const { data } = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/logout/`,
           {
             refresh_token: localStorage.getItem("refresh_token"),
           },
-          { headers: { "Content-Type": "application/json" } },
-          { withCredentials: true }
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+            }
+          }
         );
         localStorage.clear();
         axios.defaults.headers.common["Authorization"] = null;
@@ -24,6 +28,4 @@ export const Logout = () => {
       }
     })();
   }, []);
-  return null;
-  // <div></div>;
 };
