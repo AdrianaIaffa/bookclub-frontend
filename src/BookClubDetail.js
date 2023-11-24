@@ -99,7 +99,7 @@ export default function BookClubDetail() {
 
   const deleteBookClub = async () => {
     await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/bookclubs/delete_bookclub/${id}/`,
+      `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/delete_bookclub/`,
       {
         method: "DELETE",
         headers: {
@@ -110,7 +110,7 @@ export default function BookClubDetail() {
     );
    try { getBookClubDetails();
     // navigate("/bookclubs");
-   
+    window.location.href = "/bookclubs";
    }
    catch {
     window.location.href = "/bookclubs";
