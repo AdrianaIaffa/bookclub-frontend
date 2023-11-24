@@ -98,7 +98,7 @@ export default function BookClubDetail() {
   };
 
   const deleteBookClub = async () => {
-    const response = await fetch(
+     await fetch(
       `${process.env.REACT_APP_BACKEND_URL}/bookclubs/${id}/delete_bookclub/`,
       {
         method: "DELETE",
