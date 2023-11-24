@@ -111,7 +111,8 @@ export default function BookClubDetail() {
 
     if (response.status === 204) {
       getBookClubDetails();
-      // navigate("/bookclubs");
+      navigate("/bookclubs");
+      window.location.href = "/bookclubs";
       console.log("Book club deleted successfully");
     } else {
       console.error("Failed to delete the book club");
