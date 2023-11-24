@@ -110,6 +110,7 @@ export default function BookClubDetail() {
     );
 
     if (response.status === 204) {
+      getBookClubDetails();
       navigate("/bookclubs");
       console.log("Book club deleted successfully");
     } else {
