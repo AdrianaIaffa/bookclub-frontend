@@ -108,9 +108,13 @@ export default function BookClubDetail() {
         },
       }
     );
-    getBookClubDetails();
+   try { getBookClubDetails();
     // navigate("/bookclubs");
+   
+   }
+   catch {
     window.location.href = "/bookclubs";
+   }
   }
   
   //   if (response.status === 204) {
