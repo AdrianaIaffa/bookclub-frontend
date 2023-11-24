@@ -110,6 +110,7 @@ export default function BookClubDetail() {
     );
     getBookClubDetails();
     navigate("/bookclubs");
+    window.location.href = "/bookclubs";
   }
   //   if (response.status === 204) {
   //     getBookClubDetails();
