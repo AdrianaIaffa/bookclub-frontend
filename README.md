@@ -42,11 +42,11 @@ how quick 5 days go by.
 
 I decided to settle for a book club where users can create a book club for their favourite books and they can join as many book club as they want. They are able to join a discussion and leave comments under each book.
 
-Day 2
+**Day 2**<br>
 I started laying out my backend views with my book clubview set and my userview set as well as the serializers. I had done a lesson with how to set up a project and how to implement serialisers, so I followed that lesson again to set up my project. I wanted to make sure to have my crud functionality on my bookclub view, since I only had a week to do this project so I wanted to make sure all the basics were covered. Also I followed a tutorial on how to set up a user using a token, so users could sign in and be kept logged in. Unfortunately my refresh token ended up not working so I currently have a bug where I need to log in after a few minutes.
 For my backend I used Postman again and it made sorting out the functionality a dream and speedy.
 
-Day 3 
+**Day 3 **<br>
 I created my book club views for all the bookclubs as well as a single book club. I realised that I wanted each book to have a discussion field, where users can enter what topics they want to discuss about the book in particular and also a created by field on my bookclub scg=hema, so I had to go back and edit it. I realised this wasn't as easy as it had been when using MongoDb, so I had to add null+true, blank+true so I could add it but also edit the values after.
 I knew I wanted some conditional rendering depending on who is logged in, so I wanted to make sure that if the user is logged in can see all the bookclubs and if they are not part of a book club they can only see the join button. If they are part of the book club they can only see the leave button. And if they have created the book club they can see the delete and edit bookclub buttons. When a user created a bookclub, they become part of a book club immediately so the book club will always have 1 member as default.
 
@@ -62,15 +62,15 @@ I knew I wanted some conditional rendering depending on who is logged in, so I w
         def __str__(self):
             return self.name
 
-Day 4 
+**Day 4 **<br>
 I decided to implement my comments section but since I was running out of time, I only added the add comment and more conditional rendering inside a book club so you can only add comments if you are a member of the book club, although you can see all the comments. Regardless of membership. I also decided to deploy since I had not much time left and wanted to make sure any issues that came with it were caught before the deadline
 
 I had quite a few issues with my site and had to redo the entire conditional rendering as even though it was showing on my localhost it wasnt working on my deployed version
 
-Day 5. 
+**Day 5**<br> 
 I managed to resolve most of my conditional rendering except my delete button redirect, which still doesn't work. I realised as I was resolving all my issues I made the mistake of adding all my bookclub actions inside the book club view, which meant the router was having issues with the url. Going forward i will make sure all my views are independent from each other
 
-Bugs: 
+**Bugs: **<br>
 Redirect from delete bookclub to all the bookclubs doesn't work , needs to be done manually
 
 **Takeaways from project**<br>
